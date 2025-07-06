@@ -1,0 +1,148 @@
+
+/* style.css - Perpustakaan Digital */
+
+* {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(135deg, #e0f7fa, #e1f5fe);
+  color: #333;
+}
+
+.navbar {
+  background-color: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+}
+
+.navbar:hover {
+  background-color: rgba(255, 255, 255, 0.9);
+}
+
+.nav-link {
+  color: #0d47a1 !important;
+  font-weight: 500;
+  transition: 0.3s;
+}
+
+.nav-link:hover {
+  color: #1565c0 !important;
+  transform: translateY(-2px);
+}
+
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  background: linear-gradient(to right, #e3f2fd, #bbdefb);
+  animation: fadeInBackground 1.5s ease-in;
+}
+
+@keyframes fadeInBackground {
+  from {
+    opacity: 0;
+    background-position: right;
+  }
+  to {
+    opacity: 1;
+    background-position: left;
+  }
+}
+
+.hero-title {
+  font-size: 3rem;
+  font-weight: bold;
+  color: #0d47a1;
+  animation: slideInLeft 1s ease-in-out;
+}
+
+.hero-desc {
+  font-size: 1.1rem;
+  color: #333;
+  animation: fadeIn 2s ease-in;
+}
+
+.btn-main {
+  background-color: #1976d2;
+  color: white;
+  font-weight: 500;
+  transition: background 0.3s ease;
+}
+
+.btn-main:hover {
+  background-color: #1565c0;
+}
+
+.btn-outline-main {
+  border-color: #1976d2;
+  color: #1976d2;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.btn-outline-main:hover {
+  background-color: #1976d2;
+  color: white;
+}
+
+.img-hero {
+  max-height: 350px;
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0px); }
+}
+
+.search-box {
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+  padding: 20px;
+  animation: fadeInUp 1s ease-in-out;
+}
+
+footer {
+  background-color: #eeeeee;
+  padding: 20px;
+  text-align: center;
+  font-size: 0.9rem;
+  color: #555;
+}
+
+/* Animate.css keyframes custom support */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
