@@ -1,31 +1,45 @@
 <?php
+// Mulai session
 session_start();
+
+// Include koneksi database
 require '../config/koneksi.php';
 
+// Cek apakah user sudah login dan rolenya 'user'
 if (!isset($_SESSION['role']) || $_SESSION['role'] != 'user') {
     header("Location: ../auth/login.php");
     exit;
 }
 
+// Ambil data user berdasarkan session
 $id = $_SESSION['id_users'];
 $user = mysqli_query($conn, "SELECT * FROM users WHERE id_users = $id");
 $data = mysqli_fetch_assoc($user);
 
-// Proses update
+// Proses update data user
 if (isset($_POST['update'])) {
     $username = $_POST['username'];
     $password = $_POST['password'];
 
+    // Update ke database
     mysqli_query($conn, "UPDATE users SET username = '$username', password = '$password' WHERE id_users = $id");
+
+    // Update session username
     $_SESSION['username'] = $username;
 
+    // Tampilkan alert dan redirect
     echo "<script>alert('Profil berhasil diperbarui!'); location.href='index.php';</script>";
 }
 
-// Proses hapus
+// Proses hapus akun
 if (isset($_POST['hapus'])) {
+    // Hapus user dari database
     mysqli_query($conn, "DELETE FROM users WHERE id_users = $id");
+
+    // Hapus session
     session_destroy();
+
+    // Redirect ke login
     echo "<script>alert('Akun berhasil dihapus'); location.href='../auth/login.php';</script>";
     exit;
 }
@@ -39,9 +53,7 @@ if (isset($_POST['hapus'])) {
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
     <style>
-        .btn-spacing {
-            margin-bottom: 6px;
-        }
+        .btn-spacing { margin-bottom: 6px; }
     </style>
 </head>
 <body class="bg-light">
@@ -49,7 +61,7 @@ if (isset($_POST['hapus'])) {
 <div class="container py-5">
     <div class="row justify-content-center">
         <div class="col-md-4">
-            <!-- Card -->
+            <!-- Kartu kelola akun -->
             <div class="card shadow-sm">
                 <div class="card-header bg-primary text-white text-center">
                     <h5 class="mb-0"><i class="bi bi-person-circle me-2"></i>Kelola Akun</h5>
@@ -76,7 +88,7 @@ if (isset($_POST['hapus'])) {
                         </div>
                     </form>
 
-                    <!-- Tombol Hapus -->
+                    <!-- Tombol Hapus Akun -->
                     <form method="post" class="mt-2">
                         <div class="d-grid">
                             <button type="submit" name="hapus" class="btn btn-outline-danger btn-sm" onclick="return confirm('Yakin ingin menghapus akun ini?')">

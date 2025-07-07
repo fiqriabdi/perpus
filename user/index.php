@@ -9,7 +9,7 @@ if (!isset($_SESSION['role']) || $_SESSION['role'] != 'user') {
 
 $keyword = '';
 if (isset($_GET['cari'])) {
-    $keyword = $_GET['keyword'];
+    $keyword = mysqli_real_escape_string($conn, $_GET['keyword']);
     $query = "SELECT * FROM books 
               WHERE stok > 0 AND (judul LIKE '$keyword%' OR penulis LIKE '$keyword%') 
               ORDER BY judul ASC";
@@ -75,25 +75,24 @@ $buku = mysqli_query($conn, $query);
             <div class="col-sm-6 col-md-4 col-lg-3 mb-4">
                 <div class="card book-card h-100">
                     <a href="../assets/img/<?= $row['gambar']; ?>">
-                    <img src="../assets/img/<?= $row['gambar']; ?>" class="card-img-top book-img" alt="<?= htmlspecialchars($row['judul']); ?>">
+                        <img src="../assets/img/<?= $row['gambar']; ?>" class="card-img-top book-img" alt="<?= htmlspecialchars($row['judul']); ?>">
                     </a>
 
-                   <div class="card-body d-flex flex-column">
-    <h6 class="card-title"><?= htmlspecialchars($row['judul']); ?></h6>
-    <?php if (!empty($row['deskripsi'])): ?>
-    <p class="small text-muted mb-2"><?= htmlspecialchars(mb_strimwidth($row['deskripsi'], 0, 57, "...")); ?></p>
-    <?php endif; ?>
-    <p class="text-muted mb-1"><i class="bi bi-person-fill"></i> <?= htmlspecialchars($row['penulis']); ?></p>
-    <p class="mb-2"><i class="bi bi-stack"></i> Stok: <strong><?= $row['stok']; ?></strong></p>
+                    <div class="card-body d-flex flex-column">
+                        <h6 class="card-title"><?= htmlspecialchars($row['judul']); ?></h6>
+                        <?php if (!empty($row['deskripsi'])): ?>
+                            <p class="small text-muted mb-2"><?= htmlspecialchars(mb_strimwidth($row['deskripsi'], 0, 57, "...")); ?></p>
+                        <?php endif; ?>
+                        <p class="text-muted mb-1"><i class="bi bi-person-fill"></i> <?= htmlspecialchars($row['penulis']); ?></p>
+                        <p class="mb-2"><i class="bi bi-stack"></i> Stok: <strong><?= $row['stok']; ?></strong></p>
 
-    <form action="../proses/proses_pinjam.php" method="post" class="mt-auto">
-        <input type="hidden" name="id_buku" value="<?= $row['id_buku']; ?>">
-        <button type="submit" name="pinjam" class="btn btn-success w-100 btn-sm">
-            <i class="bi bi-cart-plus"></i> Pinjam
-        </button>
-    </form>
-</div>
-
+                        <form action="../proses/proses_pinjam.php" method="post" class="mt-auto">
+                            <input type="hidden" name="id_buku" value="<?= $row['id_buku']; ?>">
+                            <button type="submit" name="pinjam" class="btn btn-success w-100 btn-sm">
+                                <i class="bi bi-cart-plus"></i> Pinjam
+                            </button>
+                        </form>
+                    </div>
                 </div>
             </div>
         <?php endwhile; ?>

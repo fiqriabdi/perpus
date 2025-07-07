@@ -1,46 +1,62 @@
+/* --------------------------------------
+   style.css - Perpustakaan Digital
+   -------------------------------------- */
 
-/* style.css - Perpustakaan Digital */
-
+/* Scroll behavior halus saat pindah bagian */
 * {
   scroll-behavior: smooth;
 }
 
+/* --------------------------------------
+   Tampilan dasar body
+----------------------------------------- */
 body {
   margin: 0;
   font-family: 'Segoe UI', sans-serif;
-  background: linear-gradient(135deg, #e0f7fa, #e1f5fe);
-  color: #333;
+  background: linear-gradient(135deg, #e0f7fa, #e1f5fe); /* Gradasi biru muda */
+  color: #333; /* Warna teks abu gelap */
 }
 
+/* --------------------------------------
+   Navbar dengan efek blur dan transisi
+----------------------------------------- */
 .navbar {
-  background-color: rgba(255, 255, 255, 0.7);
-  backdrop-filter: blur(10px);
+  background-color: rgba(255, 255, 255, 0.7); /* Transparan putih */
+  backdrop-filter: blur(10px); /* Efek blur di belakang */
   transition: all 0.3s ease;
 }
 
+/* Saat hover navbar jadi lebih terang */
 .navbar:hover {
   background-color: rgba(255, 255, 255, 0.9);
 }
 
+/* --------------------------------------
+   Link di navbar
+----------------------------------------- */
 .nav-link {
-  color: #0d47a1 !important;
+  color: #0d47a1 !important; /* Biru tua */
   font-weight: 500;
   transition: 0.3s;
 }
 
 .nav-link:hover {
-  color: #1565c0 !important;
-  transform: translateY(-2px);
+  color: #1565c0 !important; /* Biru terang saat hover */
+  transform: translateY(-2px); /* Naik sedikit saat hover */
 }
 
+/* --------------------------------------
+   Bagian hero (header depan)
+----------------------------------------- */
 .hero {
   min-height: 100vh;
   display: flex;
   align-items: center;
-  background: linear-gradient(to right, #e3f2fd, #bbdefb);
+  background: linear-gradient(to right, #e3f2fd, #bbdefb); /* Gradasi biru lembut */
   animation: fadeInBackground 1.5s ease-in;
 }
 
+/* Animasi masuk latar belakang */
 @keyframes fadeInBackground {
   from {
     opacity: 0;
@@ -52,30 +68,36 @@ body {
   }
 }
 
+/* Judul utama di hero */
 .hero-title {
   font-size: 3rem;
   font-weight: bold;
-  color: #0d47a1;
+  color: #0d47a1; /* Biru */
   animation: slideInLeft 1s ease-in-out;
 }
 
+/* Deskripsi tambahan di hero */
 .hero-desc {
   font-size: 1.1rem;
   color: #333;
   animation: fadeIn 2s ease-in;
 }
 
+/* --------------------------------------
+   Tombol utama
+----------------------------------------- */
 .btn-main {
-  background-color: #1976d2;
+  background-color: #1976d2; /* Biru */
   color: white;
   font-weight: 500;
   transition: background 0.3s ease;
 }
 
 .btn-main:hover {
-  background-color: #1565c0;
+  background-color: #1565c0; /* Biru lebih tua saat hover */
 }
 
+/* Tombol outline (bingkai saja) */
 .btn-outline-main {
   border-color: #1976d2;
   color: #1976d2;
@@ -88,25 +110,35 @@ body {
   color: white;
 }
 
+/* --------------------------------------
+   Gambar di bagian hero (depan)
+----------------------------------------- */
 .img-hero {
   max-height: 350px;
   animation: float 3s ease-in-out infinite;
 }
 
+/* Animasi gambar melayang naik turun */
 @keyframes float {
   0% { transform: translateY(0px); }
   50% { transform: translateY(-10px); }
   100% { transform: translateY(0px); }
 }
 
+/* --------------------------------------
+   Kotak pencarian / search
+----------------------------------------- */
 .search-box {
   background-color: white;
   border-radius: 10px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08); /* Bayangan lembut */
   padding: 20px;
   animation: fadeInUp 1s ease-in-out;
 }
 
+/* --------------------------------------
+   Footer
+----------------------------------------- */
 footer {
   background-color: #eeeeee;
   padding: 20px;
@@ -115,7 +147,11 @@ footer {
   color: #555;
 }
 
-/* Animate.css keyframes custom support */
+/* --------------------------------------
+   Kumpulan animasi tambahan
+----------------------------------------- */
+
+/* Animasi muncul dari bawah */
 @keyframes fadeInUp {
   from {
     opacity: 0;
@@ -127,6 +163,7 @@ footer {
   }
 }
 
+/* Animasi masuk dari kiri */
 @keyframes slideInLeft {
   from {
     opacity: 0;
@@ -138,6 +175,7 @@ footer {
   }
 }
 
+/* Animasi fade in */
 @keyframes fadeIn {
   from {
     opacity: 0;

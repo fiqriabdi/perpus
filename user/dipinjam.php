@@ -1,17 +1,26 @@
 <?php
+// Mulai session
 session_start();
+
+// Koneksi ke database
 require '../config/koneksi.php';
 
+// Set zona waktu
 date_default_timezone_set('Asia/Jakarta');
+
+// Ambil jam saat ini
 $jam = date("H:i:s");
 
+// Cek apakah user sudah login dan rolenya 'user'
 if (!isset($_SESSION['role']) || $_SESSION['role'] != 'user') {
     header("Location: ../auth/login.php");
     exit;
 }
 
+// Ambil ID user dari session
 $id_users = $_SESSION['id_users'];
 
+// Ambil daftar buku yang sedang dipinjam user
 $peminjaman = mysqli_query($conn, "
     SELECT p.id_peminjaman, b.judul, p.tgl_pinjam
     FROM peminjaman p
@@ -25,12 +34,14 @@ $peminjaman = mysqli_query($conn, "
 <head>
     <meta charset="UTF-8">
     <title>Buku yang Dipinjam</title>
+    <!-- Bootstrap & Icon -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
 </head>
 <body class="bg-light">
 
 <div class="container py-5">
+    <!-- Header dan navigasi -->
     <div class="d-flex justify-content-between align-items-center mb-4">
         <h3 class="mb-0"><i class="bi bi-bookmark-check me-2"></i>Buku yang Sedang Dipinjam</h3>
         <div>
@@ -39,10 +50,13 @@ $peminjaman = mysqli_query($conn, "
         </div>
     </div>
 
+    <!-- Tampilkan pesan jika tidak ada buku -->
     <?php if (mysqli_num_rows($peminjaman) === 0): ?>
         <div class="alert alert-info text-center">
             <i class="bi bi-info-circle me-1"></i> Tidak ada buku yang sedang dipinjam.
         </div>
+
+    <!-- Tampilkan daftar buku yang sedang dipinjam -->
     <?php else: ?>
         <div class="table-responsive">
             <table class="table table-bordered table-hover align-middle">
@@ -57,8 +71,9 @@ $peminjaman = mysqli_query($conn, "
                     <?php while ($row = mysqli_fetch_assoc($peminjaman)) : ?>
                         <tr>
                             <td><?= htmlspecialchars($row['judul']); ?></td>
-                            <td class="text-center"><?= $row['tgl_pinjam']; ?> / <?="$jam"?></td>
+                            <td class="text-center"><?= $row['tgl_pinjam']; ?> / <?= $jam; ?></td>
                             <td class="text-center">
+                                <!-- Tombol kembalikan buku -->
                                 <form method="post" action="../proses/proses_kembali.php" class="d-inline">
                                     <input type="hidden" name="id_peminjaman" value="<?= $row['id_peminjaman']; ?>">
                                     <button type="submit" name="kembalikan" class="btn btn-success btn-sm">
